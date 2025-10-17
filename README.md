@@ -21,6 +21,7 @@ Clone o repositório ou baixe diretamente o script:
 
 ```bash
 git clone https://www.github.com/aliendede1/Meu-Vim.git
+cd Meu-Vim
 chmod +x *.sh
 ./install-vim.sh
 
