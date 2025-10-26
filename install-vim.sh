@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =====================================
-# Script Universal de Instalação do Vim Full Stack
+# Script Universal de Instalação do Vim Full Stack com Vundle (Bundle)
 # Compatível com: Debian/Ubuntu, Arch, Fedora, openSUSE, Void, etc.
 # =====================================
 
@@ -41,18 +41,17 @@ case "$DISTRO" in
         ;;
 esac
 
-# --- Instalar vim-plug ---
-echo "Instalando vim-plug..."
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# --- Instalar Vundle (Bundle) ---
+echo "Instalando Vundle (Bundle)..."
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # --- Criar diretório do Vim ---
-mkdir -p ~/.vim/plugged
+mkdir -p ~/.vim/bundle
 
 # --- Criar .vimrc ---
 cat > ~/.vimrc <<'EOF'
 " =====================================
-" Vim 9 - Configuração Full Stack Otimizada
+" Vim 9 - Configuração Full Stack Otimizada (Vundle)
 " =====================================
 
 " --- Básico ---
@@ -99,32 +98,34 @@ inoremap { {}<Esc>i
 inoremap " ""<Esc>i
 inoremap ' ''<Esc>i
 
-" --- Plugins ---
-call plug#begin('~/.vim/plugged')
+" --- Plugins com Vundle ---
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Aparência
-Plug 'sainnhe/gruvbox-material'
-Plug 'itchyny/lightline.vim'
-Plug 'ryanoasis/vim-devicons'
+Plugin 'sainnhe/gruvbox-material'
+Plugin 'itchyny/lightline.vim'
+Plugin 'ryanoasis/vim-devicons'
 
 " Navegação e utilitários
-Plug 'preservim/nerdtree'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
+Plugin 'preservim/nerdtree'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+Plugin 'tpope/vim-fugitive'
 
 " Snippets e auto pares
-Plug 'jiangmiao/auto-pairs'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " LSP e Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Linguagens e sintaxe
-Plug 'sheerun/vim-polyglot'
+Plugin 'sheerun/vim-polyglot'
 
-call plug#end()
+call vundle#end()
+filetype plugin indent on
 
 " --- Tema ---
 let g:gruvbox_material_background = 'medium'
@@ -173,8 +174,8 @@ autocmd TermEnter * setlocal nonumber norelativenumber
 EOF
 
 # --- Instalar Plugins ---
-echo "Instalando plugins do Vim..."
-vim +PlugInstall +qall
+echo "Instalando plugins do Vim com Vundle..."
+vim +PluginInstall +qall
 
 echo "✅ Instalação concluída com sucesso!"
 echo "Abra o Vim e aproveite sua configuração Full Stack 🚀"
