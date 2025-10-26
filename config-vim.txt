@@ -1,5 +1,5 @@
 " =====================================
-" Vim 9 - Configuração Full Stack Otimizada
+" Vim 9 - Configuração Full Stack Otimizada (Vundle)
 " =====================================
 
 " --- Básico ---
@@ -18,9 +18,9 @@ set scrolloff=4
 set clipboard=unnamedplus
 
 " --- Desempenho ---
-set lazyredraw        " Evita redesenhar desnecessariamente
-set ttyfast            " Melhora performance em terminais lentos
-set updatetime=500     " Atualização mais rápida do Coc
+set lazyredraw
+set ttyfast
+set updatetime=500
 set shortmess+=c
 set noswapfile
 set nobackup
@@ -46,32 +46,34 @@ inoremap { {}<Esc>i
 inoremap " ""<Esc>i
 inoremap ' ''<Esc>i
 
-" --- Plugins ---
-call plug#begin('~/.vim/plugged')
+" --- Plugins com Vundle ---
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Aparência
-Plug 'sainnhe/gruvbox-material'
-Plug 'itchyny/lightline.vim'
-Plug 'ryanoasis/vim-devicons'
+Plugin 'sainnhe/gruvbox-material'
+Plugin 'itchyny/lightline.vim'
+Plugin 'ryanoasis/vim-devicons'
 
 " Navegação e utilitários
-Plug 'preservim/nerdtree'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'         " Git integration
+Plugin 'preservim/nerdtree'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+Plugin 'tpope/vim-fugitive'
 
 " Snippets e auto pares
-Plug 'jiangmiao/auto-pairs'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
-" LSP e Autocomplete (leve e poderoso)
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" LSP e Autocomplete
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Linguagens e sintaxe
-Plug 'sheerun/vim-polyglot'
+Plugin 'sheerun/vim-polyglot'
 
-call plug#end()
+call vundle#end()
+filetype plugin indent on
 
 " --- Tema ---
 let g:gruvbox_material_background = 'medium'
@@ -85,7 +87,7 @@ let g:lightline = {
       \ 'component_function': {'cocstatus': 'coc#status'}
       \ }
 
-" --- COC (Autocompletar e LSP) ---
+" --- COC ---
 let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-html',
@@ -96,9 +98,7 @@ let g:coc_global_extensions = [
   \ 'coc-prettier'
   \ ]
 
-" Desativa autocomplete em modo de busca
-
-" Teclas de autocomplete otimizadas
+" Teclas de autocomplete
 inoremap <silent><expr> <C-Space> coc#refresh()
 inoremap <silent><expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <silent><expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
@@ -109,13 +109,13 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" --- Atalhos úteis ---
+" --- Atalhos ---
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-p> :Files<CR>
 nnoremap <C-f> :Rg<CR>
 nnoremap <C-t> :terminal<CR>
 nnoremap <leader>r :source $MYVIMRC<CR>
 
-" --- Melhor experiência com terminal integrado ---
+" --- Terminal integrado ---
 autocmd TermOpen * startinsert
 autocmd TermEnter * setlocal nonumber norelativenumber
