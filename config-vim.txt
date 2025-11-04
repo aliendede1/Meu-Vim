@@ -1,7 +1,3 @@
-" =====================================
-" Vim 9 - Configuração Full Stack Otimizada (Vundle)
-" =====================================
-
 " --- Básico ---
 set nocompatible
 set encoding=utf-8
@@ -63,7 +59,6 @@ Plugin 'tpope/vim-fugitive'
 
 " Snippets e auto pares
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
 " LSP e Autocomplete
@@ -113,7 +108,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-p> :Files<CR>
 nnoremap <C-f> :Rg<CR>
-nnoremap <C-t> :terminal<CR>
+noremap <C-t> :terminal<CR>
 nnoremap <leader>r :source $MYVIMRC<CR>
 
 " --- Terminal integrado ---
